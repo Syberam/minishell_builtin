@@ -38,12 +38,12 @@ char			**ft_exec_path(char **av, t_env *env)
 	int		i;
 
 	av[0] = ft_strmini(av[0]);
-	cmds = (char **)ft_memalloc(sizeof(char *) * 2);
-	cmds[0] = ft_strdup(av[0]);
-	cmds[1] = 0;
+	cmds1 = (char **)ft_memalloc(sizeof(char *) * 2);
+	cmds1[0] = ft_strdup(av[0]);
+	cmds1[1] = 0;
 	cmds2 = ft_strsplit(ft_getenv_var("PATH", env), ':');
 	i = -1;
-	while (cmds[++i])
+	while (cmds2[++i])
 	{
 		cmds2[i] = ft_ext_strjoin_free(cmds2[i], "/", 1);
 		cmds2[i] = ft_ext_strjoin_free(cmds2[i], av[0], 1);

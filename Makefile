@@ -34,6 +34,7 @@ SRC =	$(addprefix $(SRC_PATH)/, main.c \
 		signals.c \
 		errors.c \
 		ft_env.c \
+		ft_jointab.c \
 		ft_unsetenv.c)
 
 OBJ = $(SRC:$(SRC_PATH)/%.c=$(OBJ_PATH)/%.o)

@@ -51,6 +51,7 @@ char				*ft_get_var_name(char *varpath);
 char				*ft_storenv(char *var, t_env *env);
 
 char				**ft_sentsplit(char *sentence);
+char				**ft_jointabs(char **tab1, char **tab2);
 
 t_env				*ft_getenv(char **env);
 t_env				*ft_setenv(char *newvar, t_env *env);
