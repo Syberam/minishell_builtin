@@ -6,13 +6,13 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 00:05:50 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/23 07:14:49 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/28 05:52:53 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cd.h"
 
-char			cd_step10(char *destpath, char **env, t_opt options)
+char			cd_step10(char *destpath, char **env, t_opt *options)
 {
 	char		*pwd;
 
@@ -40,7 +40,7 @@ char			cd_step10(char *destpath, char **env, t_opt options)
 		ft_putendl(debbenv->content);
 		debbenv = debbenv->next;
 	}*/
-	if (!options.p)
+	if (!options->p)
 		return (0);
 	return (0);
 }
