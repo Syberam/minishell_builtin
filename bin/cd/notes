@@ -1,0 +1,200 @@
+st login: Thu Jun 15 22:57:57 on ttys004
+➜  cd cd -
+~/Documents/42/Projets/cd
+➜  cd cd --
+➜  ~ cd -g
+cd: no such file or directory: -g
+➜  ~ cd .
+➜  ~ cd ..
+➜  /Users cd home
+cd: no such file or directory: home
+➜  /Users cd ~
+➜  ~ cd Documents/42/Projets/cd
+➜  cd ls
+➜  cd cd .././../../././../Documents
+➜  Documents cd .././../../././../
+➜  / cd
+➜  ~ cd
+➜  ~ cd ..
+➜  /Users cd ..
+➜  /
+
+➜  cd mkdir test1
+➜  cd chmod 000 test1
+➜  cd cd test1
+cd: permission denied: test1
+
+➜  cd cd lol
+cd: no such file or directory: lol
+
+➜  cd touch txttest.txt
+➜  cd cd txttest.txt
+cd: not a directory: txttest.txt
+➜  cd
+
+➜  cd cd ""
+➜  cd cd
+➜  ~ cd -L ""
+➜  ~ cd -P ""
+➜  ~ cd Documents/42/Projets/cd
+➜  cd
+
+
+cd: string not in pwd: ..
+➜  cd cd ".. ."
+cd: no such file or directory: .. .
+➜  cd cd test1 ..
+cd: string not in pwd: test1
+➜  cd ls
+notes       test1       txttest.txt
+➜  cd cd test1
+cd: permission denied: test1
+➜  cd cd .. test1
+cd: string not in pwd: ..
+➜  cd cd .. ..
+cd: string not in pwd: ..
+➜  cd
+
+Man
+
+1 - Si aucun argument n'est renseigne et que la variable d'environnement HOME est vide ou non definie, le comportement par defaut est "implementation-defined" et aucune etape supplementaire devrait etre faite.
+
+2 - Si aucun dossier de direction n'es renseigne es t que la variable HOME n'est aps vide, cd devrait agir comme si le dossier renseigne dasn la variable HOME avait etait definir comme etant le dossier de destination
+
+3 - Si le dossier de destination commence par un /, mettre curpath a l'operant, et executer l'etape 7
+
+4 - si le premier element du dossier de destination est . ou .., execuer l'etape 6
+
+5 - Commencer avec le premier chemin dans les chemins epares par des : de CDPATH (voir la section VARIABLES D'ENVIRONNEMENT) si le chemin n'est pas null, teste si la concatenation de ce chemin, un / si le chemin ne termine pas par un /, et le dossier de destination corresponde bien a un dossier. Si le chemin est null, tester si la concatenation de ., un / et le nom du chemin de destination designe un dossier. dans tous les cas si la phrase resultante designe un dossier existant, configurer curpath avec cette phrase et proceder a l'etape 7. Dasn les autres cas, si la phrase resultant ne desigen pas un dossier existant, repeter cette etape jusqu'a ce que tous les chemin ait ete teste 
+
+6 - Configurer curpath avec l'argument.
+
+7 - Si l'option -P est active, executer l'etape 10. Si curpath ne commence pas par un /, configurer curpath avec la phrase composee de la concatenation de la valer de PWD, un slash si la value de PWD ne fini pas par un /, et curpath
+
+8 - La valeur de curpath devrait alors convertie en form canoniqu comme suit, considerent chaque composant du debut a la fin, dans la sequence :
+		a. les composant . et chaque / qui les separent du prochain composant doivent etre supprimes
+		b.pour chaque composant .., s'il y a un composant precedent et que ce n'est ni la racine, ni .. alors :
+				i. si le composent suivant ne fait pas reference (dans le context de la resolution d'un chemin avec un link symbolic suit) a un dossier, alors cd doit renvoyer un message d'erreur approprie et aucune autre etape ne doit etre faite
+				ii. Le composant precedent, tout / separent le precedent composant de .., .., et tout / separant .. du composant suivant (s'il y en a) doivent etre supprimes.
+				➜  /Users cd
+				➜  ~ cd Documents/././././42/..
+				➜  Documents cd ...
+				➜  /Users cd ....
+				➜  / cd
+				➜  ~ cd Documents
+				➜  Documents cd ../.
+				➜  ~ cd Downloads
+				➜  Downloads cd ../..
+				➜  /Users
+		c. Une implementation pourrait simplifier curpath en enlevant tout / suivants qui ne sous pas nonplus des / dirigeants, remplacant de multiple / non dirigeants consecutifs avec un seul slash et remplacant 3 ou plus / dirigeants avec un seul /. Si le curpath resultatn de cette canonnicalization est null, aucune etape supplementaire ne doit etre faite
+
+9 - Si curpath est plus long que le nombre de bites max de {PATH_MAX} (incluamt \0), alors curpath devrait etre converti d'un chemin absolu a un chemin relatif equivalent si possible. Cette conversion doit toujours etre consideree possible si la valeur de PWD, avec un / dirigeant ajoute s'il n'en dispose pas deja d'un, est une sous phrase initiale de curpath. Meme si c'est considerer possible dans d'autre circonstence n'est pas specifie. L'implementation doit aussi appliquer cette conversion si curpath moins long que les bytes de {PATH_MAX} ou le dossier de direction etait plus long que le nombre de bytes de  {PATH_MAX}
+
+10 - cd doit alors effectuer la meme action equivalente a la fonction chdir() appelee avec curpath comme chemin en argument. Si cette action echoue pour quelaue raison, cd doit renvoyer un message d'erreur approprie et la suite de cette etape ne doit pas etre executee. Si l'option -P n'est pas active, la variable d'environnement PWD doit etre configurer a la valeur que curpath avait en arrivant a l'etape 9 (cad avant la convertion en chemin relatif). Si -P est active, la variable d'environnement PWD doit etre configuree a la phrase qui resortirait de pwd -P. S'il n'y a aps les permissions d'acces pour le nouveau dossier ou sur un parent de ce dossier pour determinet le dossier actuel, la valeur de la variable d'environnement PWD n'est pas specifiee.
+
+Si, au cours de l'execution des etapes precedente, la variable d'environnement est configuree, la variable d'environnement OLD-PWD doit aussi etre configuree a la valeur de l'ancier dossier courant (they le dossier courent directemen tprioritaire pour l'appel de cd).
+
+OPTIONS
+	cd doit etre conforme au voluments de defi itiosn de POSIX.1-2008, Section 12.2, utiity syntax guideline
+	Les options suivantes doivent etre supportees par l'implementation:
+	-L		Utilise l'operateur .. logiquement; les composant lien symbolic ne doivent pas etre resolu avant l'execution des composants .. . (regarde l'etape 8. et 9. dans la DESCRIPTION)
+	-P		Utilise l'operateur .. physiquement; les composants lien symbolics doivent etre resolu avant l'execution des composants .. (regarder l'etape 7. dans la description)
+	Si les option s-L et -P sont toutes deux specifiees la dernier de ces option doit etre utilisee et toutes les autres doivent etre ignorees. Si ni -L ni -P sont specifies, l'operateur doit etre utilise en suivant l logique ..; voir DESCRITPION
+
+OPERANTS
+	Les operateurs suivant doivent supportes :
+	directory	un chemin absolu ou relatif du dossier qui doit devenir le nouveau dossier de travail. L'interpretation d'un chemin relatif par cd depend de l'option -L et des variables d'environnement CDPATH et PWD. Si le dossier est une phrase vide, le resultats n'est pas specifie.
+	-			Quand un trait d'union est utilise comme argument ca doit etre equivalent a la commande cd "$OLDPATH" && pwd qui change le precedent dossier de travail et ainsi ecrit son nom.
+
+STDIN
+	pas utilise
+
+INPUT FILES
+	aucun
+
+VARAIBLES D'ENVIRONNEMENT
+	Les variables d'environnement suivante doivent affecter l'executiond de cd
+	CDPATH		Une lise de chemin separed pas des : qui font reference a des dossiers. cd doit les utiliser  dans l'objectif de changer le dossier, comme descrit dans DESCRIPTION. Une phrase vide a la place d'un chemin represente le dossier courrant. Si CDPATH n'est pas configure, il doit etre traite comme s'il contenant une phrase vide
+	HOME		Le nom du dossier, utilise quand aucun dossier n'est passe en argument
+	LANG		Fourni une valeur default pour les variable d'internationalisation qui ne sont pas definies ou nulles. (voir le volunme de definitiond e POSIX.1-2008, Section 8.2, Variables d'internationalisation pour la priorite des variables d'internationalisation utilisees pour determiner les valeur des categories locales.
+	LC_ALL		Si defini a a une phrase de valeur non nulle, ignorer la valeur de toutes les autres variables d'internationalisation
+	LC_CTYPE	Determine la locale pour l'interpretation de sequences de bit de donnees de text comme caracteres (par exemple, seul byte comme opose a caracter multi-byte  dans les arguments).
+	LC_MESSAGES	Determine la locale qui devrait etre utilisee pour affecter le format et le contenu des messages de diagnostic ecrit dans l'erreur standard.
+	NLSPATH		Determine la localisation des catalogues de message pour l'execution de LC_MESSAGES.
+	OLDPWD		le chemin du precedent dossier de travail, utilise par "cd -".
+	PWD			Cette varriabel doit etre definie comme sepcifie dans DESCRIPTION. Si une application configure ou deconfigure la valeur de PWD, le comportement de cd n'est pas specifie.
+
+ASYNCHRONOUS EVENTS
+	Default
+	
+STDOUT
+	If le nom d'un dossier non vide venant de CDPATH est utilise, ou si cd - est utilise, un chemin absolu du nouveau dossier de travail doit etre ecrit sur la sortie standard comme suit "%s\n, <new directory>
+	Sinon, il n'y aura ps d'output.
+	
+STDERR
+	The standard error shall be used only for diagnostic messages.
+	
+OUTPUT FILES
+	None
+
+EXTENDED DESCRIPTION
+	None
+
+EXIT STATUS
+	The following exit values shall be returned:
+	0	The directory was successfully changed.
+	>0	Une erreur est survenu
+
+CONSEQUENCES DES ERREURS
+	Le dossier de travail doit demeurer inchange
+
+	Les sections suivantes sont informatives
+USAGE D'APPLICATION
+	Depuis que cd affect l'environnement courent de l'execution du shell, c'est toujours considere comme un builtin regulier du shell. Si c'est appele dans un sous-shell ou un environnement d'execution different comme l'un des suivant :
+		(cd / tmp)
+		nohup cd
+		find . -exec cd {} \;
+	Ca n'affecte pas le dossier courant de l'environnement appelant.
+	L'utilisateur doit avoir execute les permission (search) dans le dossier avant de le changer.
+
+EXAMPLES
+	Le model suivant peut etre utilise pour efectuer une execution dnas le dossier specifie pas la position et finissnt dans le dossier de travail courant dans l'utilisation avant la  premiere comamnde cd a ete utilise:
+	cd location
+	if [ $? -ne 0]
+	then 
+		print error message
+		exit 1
+	fi
+	... faire ce qui est souhaite aussi longtemps que OLDPWD n'est pas modifie
+	cd -
+
+RATIONALE
+	L'utilisationd e CDPATH a ete introduite dans le shell System V. Cette utilisation est analogue a l'utilisation de la variable PATH dans le shell. Le shell BSD C utilise un paramettre shell cdpath dans ce but.
+	Une extension courante quand HOME n'est pas defini est de prendre le dossier login de la base de donne utilisateur pour l'utilisateur appelant. Cela ne se produit pas dans l'implementation System V
+	Quelques shell historiques, comme KornShell, font des actions specifiaues quand le nom contient un composant .., selectionne le parent logique du dossier, plutot que le dossier parent actuel; ceci, il bouge un niveau au dessus du / dans le chemin, se souvenant de ce que l'utilisateur a tape, plutot que de realiser l'equivalent de chdir("..");
+	Dans un tel shell, les commandes suivantes ne devraient pas necessairement le meme resultat pour tous les dossiers
+	cd .. && ls			ls ..
+
+	Ce comportement est maintenant celui par default. Ce n'est pas coherent avec les autres definition de .. dans la plupart des pratiaues historiaues; cela-dit, tant que ce comportement etati optionnellement accessible sur le KornShell, les autres shells n'ont historiquement pas supporte cette fonctionnalite. Le chemin logiaue est stocke dans l variable d'environnement PWD quand cd s'acheve et cette valeur est utilisee pour construire le nom du prochain dossier si cd est appele via l'option -L.
+
+FUTURE DIRECTIONS
+	None
+
+SEE ALSO
+	Section 2.12, Shell Execution Environnement, pwd
+	The Base Definitions volume of POSIX.1-2008, Chapter 8, Environnement Variabes, Sections 12.2, Utility Syntax Guidelines
+	The System Interfaces volume of POSIX.1-2008, chdir()
+
+COPYRIGHT
+
+...
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/16 03:29:10 by sbonnefo          #+#    #+#             */
+/*   Updated: 2017/06/16 04:41:11 by sbonnefo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+cd()
+{
+	char	*curpth
+
+	if (!path && (!$HOME || $HOME = ""))
+	{
+		implement defined
+		return (NOHOME);
+	}
+	if (!path)
+		path = $HOME
+	else if (path[0] = '/')
+	{
+		set curpath to operand
+		goto step 7
+	}
+	else if (cmp (. || ..) et first component)
+		goto step 6
+	else
+	{
+		while (CDPATH->pathname)
+		{
+			if (pathname)
+			{
+				if (!ft_strchr(path, '/') -> cat(path, '/'))
+					if path == directory
+						goto step 7
+					else
+						pathname->next
+			}
+			else
+				if (cat( ., /, arg) == directory)
+					goto step 7
+				else
+					pathname->next
+		}
+		if (!pathname)
+			goto step 6
+	}
+
+	step 6 :
+			curpath = directory operand
+	Step 7 :
+	if (op->p)
+		goto step 10
+	else
+		if (curpath[0] != '/')
+			curpath = cat(pwd, '/', curpath)
+
+	step 8 : convertion of curpath
+	while (curpath[i])
+	{
+		if (curpath[i] == '.' && curpath[i + 1] == '/')
+			curpath[i] = curpath[i] + 2;
+		if (curpath[i] == '.' && curpath[i + 1] == '.' && ../ && ../ != root && ../ != ..)
+			if (curpath[i + 2] += '.')
+				error no such file or directory
+			if ( ../ != directory)
+				error
+			delete ../
+		while (curpath[i] = '/' et curpath[i + 1] = '/')
+			delete curpth[i++]
+	}
+	step 9 :
+	curpath_tmp = curpath
+	if (ft_strlen(curpath) > {PATH_MAX} ((255??))
+		...
+	step 10 :
+		if (!chdir(curpath)	)
+			error
+		if (!op->P)
+			PWD = curpath_tmp;
+		else
+			PWD = pwd(curpath);
+
+
+}
