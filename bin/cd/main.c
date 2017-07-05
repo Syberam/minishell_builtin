@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 16:46:40 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/28 05:50:52 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/29 00:01:23 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int				main(int argc, char **argv, char **env)
 	}
 	else
 		destpath = ft_fill_destpath(argv[options->start], env);
-	if ((err = cd_step1(destpath, env, options)))
+	if ((err = cd_step1(destpath, env, options)) < 1)
 		return (ft_cd_errors(err, destpath));
 	return (0);
 }
