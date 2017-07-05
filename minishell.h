@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 05:30:33 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/29 03:19:18 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/05 20:09:44 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	ft_env(char **env);
 char	*ft_getenv_var(char *var, char **env);
 char	*ft_get_var_name(char *varpath);
 char	**ft_getenv(char **env);
-char	**ft_setenv(char **env);
+char	**ft_setenv(char *new, char **env, int overwrite);
 char	**ft_unsetenv(char **env);
 size_t	ft_envlen(char **env);
 char	*ft_storenv(char *var, char **env);
 char	**ft_sentsplit(char *sentence);
+int		cd_start(char **av, char **env);
 
 #endif

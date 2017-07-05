@@ -6,20 +6,20 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 23:29:14 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/29 00:33:58 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/05 20:11:33 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.c"
+#include "../minishell.h"
 
 char		*ft_get_var_name(char *varpath)
 {
 	char	*var_value;
 	char	*var_name;
 
-	if (!(env_value = ft_strchr(new, '=')))
+	if (!(var_value = ft_strchr(varpath, '=')))
 		return (NULL);
-	var_name = ft_strsub(varpath, 0, ft_strlen(varpath) - ft_strlen(env_value));
+	var_name = ft_strsub(varpath, 0, ft_strlen(varpath) - ft_strlen(var_value));
 	return (var_name);
 }
 
@@ -33,7 +33,7 @@ size_t		ft_envlen(char **env)
 	return (len - 1);
 }
 
-char		**ft_setenv(char *new, char **env, int overwrite);
+char		**ft_setenv(char *new, char **env, int overwrite)
 {
 	char	**new_env;
 	char	*var_name;
@@ -42,10 +42,10 @@ char		**ft_setenv(char *new, char **env, int overwrite);
 
 	if (overwrite)
 		return (env);
-	if (!ft_strchr(new, '=')
+	if (!ft_strchr(new, '='))
 		return (env);
-	env_var = ft_getenv_var(new);
-	if (ft_get
+	env_var = ft_getenv_var(new, env);
+	//if (ft_get
 	env_len = ft_envlen(env);
 	new_env = (char **)ft_memalloc(sizeof(char *) * (ft_envlen(env) + 2));
 	while ((++i - 1) < env_len)
@@ -53,5 +53,5 @@ char		**ft_setenv(char *new, char **env, int overwrite);
 	new_env[i] = ft_strdup(new);
 	new_env[++i] = 0;
 	free(env);
-	return (new_env)
+	return (new_env);
 }

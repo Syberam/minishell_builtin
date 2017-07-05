@@ -6,11 +6,26 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 00:33:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/27 18:40:35 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/05 20:11:11 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int			ft_dobin(char **av, char **env)
+{
+/*	if (!(ft_strcmp(av[0], "echo")))
+		ft_binecho(av, env);
+*/	if (!(ft_strcmp(av[0], "cd")))
+		cd_start(av, env);
+/*	if (!(ft_strcmp(av[0], "setenv")))
+		ft_binsetenv(av, env);
+	if (!(ft_strcmp(av[0], "unsetenv")))
+		ft_binunsetenv(av, env);
+	if (!(ft_strcmp(av[0], "env")))
+		ft_binenv(av, env);
+*/	return (0);
+}
 
 void		ft_keepenv(char **env)
 {
@@ -35,7 +50,7 @@ char		*ft_write_path(char *bin)
 {
 	char	*path;
 
-	if (!ft_strncmp(bin, "/bin/", 5))
+	if (!ft_strncmp(bin, "/", 1))
 		return (ft_strdup(bin));
 	path = ft_strjoin("bin/", bin);
 	path = ft_ext_strjoin_free(path, "/", 1);
@@ -49,6 +64,8 @@ void			ft_dobuiltin(char **av, char **env)
 		pid_t	father;
 		char	*path;
 
+		if (ft_dobin(av, env))
+			return ;
 		av[0] = ft_strmini(av[0]);
 		path = ft_write_path(av[0]);
 		father = fork();
