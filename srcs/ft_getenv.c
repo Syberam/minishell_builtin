@@ -6,15 +6,14 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 01:40:51 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/24 04:16:50 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/06 04:33:41 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 char	*ft_getenv_var(char *var, char **env)
 {
-	char	*value;
 	char	*tofind;
 	int		i;
 

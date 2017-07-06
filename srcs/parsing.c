@@ -6,11 +6,11 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 05:40:42 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/25 22:22:51 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/06 04:32:55 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 char			**ft_quoterror(char quote)
 {
