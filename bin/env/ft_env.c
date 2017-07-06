@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 23:47:16 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/22 05:23:22 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/06 20:43:04 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int				ft_manage_env_opt(t_env_opt	opts)
 	return (1);
 }
 
-int				main(int argc, char **argv, char **env)
+int				env_start(int argc, char **argv, char **env)
 {
 	size_t		i;
 	t_env_opt	opts;

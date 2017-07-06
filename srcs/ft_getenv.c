@@ -6,47 +6,48 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 01:40:51 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 04:33:41 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/06 23:53:25 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_getenv_var(char *var, char **env)
+char	*ft_getenv_var(char *var, t_env *env)
 {
 	char	*tofind;
 	int		i;
 
 	i = 0;
-	tofind = ft_strjoin(var, "="); //ATTENTION BLOQUER NOMS DE VARIABLE avec un =
-	while(env[i])
+	tofind = ft_strjoin(var, "=");
+	while(env)
 	{
 		if (ft_strstr(env[i], tofind))
 		{
 			free(tofind);
 			return (ft_strchr(env[i], '=') + 1);
 		}
-		i++;
+		env = env->next;
 	}
 	free(tofind);
 	return (NULL);
 }
 
-char		**ft_getenv(char **env)
+t_env	*ft_getenv(char **env)
 {
 	int		i;
-	char	**envbis;
+	t_env	*envbis;
+	t_env	*prenv;
 
 	i = 0;
 	while (env[i])
-		i++;
-	envbis = (char **)ft_memalloc(sizeof(char *) * (i + 1));
-	i = 0;
-	while (env[i])
 	{
-		envbis[i] = ft_strdup(env[i]);
+		prenv = (envbis) ? envbis : NULL;
+		envbis = (t_env *)ft_memalloc(sizeof(t_env));
+		prenv->next = envbis;
+		envbis->prev = prenv;
+		envbis->next = NULL;
+		envbis->var = ft_strdup(env[i]);
 		i++;
 	}
-	envbis[i] = 0;
 	return (envbis);
 }

@@ -6,7 +6,7 @@
 #    By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/06 04:01:59 by sbonnefo          #+#    #+#              #
-#    Updated: 2017/07/06 04:55:30 by sbonnefo         ###   ########.fr        #
+#    Updated: 2017/07/06 20:52:17 by sbonnefo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ SRC =	$(addprefix $(SRC_PATH)/, main.c \
 		ft_setenv.c \
 		prompt.c \
 		echo.c \
+		errors.c \
+		ft_env.c \
 		ft_unsetenv.c)
 
 OBJ = $(SRC:$(SRC_PATH)/%.c=$(OBJ_PATH)/%.o)
