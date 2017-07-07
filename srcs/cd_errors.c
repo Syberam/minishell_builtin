@@ -6,11 +6,11 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 20:00:50 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 04:15:28 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 01:29:28 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cd.h"
+#include <cd.h>
 
 int		ft_cd_errors(char err_id, char *destpath)
 {

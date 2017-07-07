@@ -6,16 +6,15 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 23:41:13 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 04:29:54 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 05:21:29 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cd.h"
 
-char		cd_step7_opp(char *destpath, char **env)
+char		cd_step7_opp(char *destpath, t_env *env)
 {
 	char	*oldpwd;
-
 
 	//tester liens symbolics
 	oldpwd = NULL;
@@ -30,7 +29,7 @@ char		cd_step7_opp(char *destpath, char **env)
 	return (CD_SUCCESS);
 }
 
-char	cd_step7(char *destpath, char **env, t_opt *options)
+char	cd_step7(char *destpath, t_env *env, t_opt *options)
 {
 	char	*working_dir;
 

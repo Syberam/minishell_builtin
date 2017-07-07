@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 00:15:17 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 04:17:45 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 07:51:52 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static char	*ft_skip_dot(char *destpath)
 	return (destpath);
 }
 
-char		cd_step8(char *destpath, char **env, t_opt *options)
+char		cd_step8(char *destpath, t_env *env, t_opt *options)
 {
 	destpath = ft_skip_dot(destpath);
 	destpath = ft_skip_extraslashes(destpath);

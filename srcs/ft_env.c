@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 23:47:16 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 21:37:45 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 05:28:18 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int				ft_manage_env_opt(t_env_opt	*opts)
 	return (1);
 }
 
-void			env_start(char **argv, char **env)
+void			env_start(char **argv, t_env *env)
 {
 	size_t		i;
 	t_env_opt	*opts;
@@ -59,11 +59,11 @@ void			env_start(char **argv, char **env)
 	}
 	if (!ft_manage_env_opt(opts))
 		return ;
-	while (env[i])
+	while (env)
 	{
-		if (env[i][0])
-			ft_putendl(env[i]);
-		i = i + 1;
+		if (env->var)
+			ft_putendl(env->var);
+		env = env->next;
 	}
 	free(opts);
 }

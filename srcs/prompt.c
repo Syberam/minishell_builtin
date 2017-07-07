@@ -6,13 +6,13 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 05:28:42 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 04:36:44 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 05:24:31 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_putprompt(char *pwd, char **env)
+void	ft_putprompt(char *pwd, t_env *env)
 {
 	char	*user;
 

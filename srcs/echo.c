@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 22:30:57 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 04:55:16 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 02:02:41 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char			*ft_makeconv(char *str, int i, int j, int *ehk)
 	return (str);
 }
 
-char			*ft_convstr(char *av, int *ehk, char **env)
+char			*ft_convstr(char *av, int *ehk, t_env *env)
 {
 	size_t		i;
 	size_t		j;
@@ -61,7 +61,7 @@ char			*ft_convstr(char *av, int *ehk, char **env)
 ** ehk for Enter Hyphen Kill
 */
 
-int				echo_start(int argc, char **argv, char **env)
+int				echo_start(int argc, char **argv, t_env *env)
 {
 	char		*cpy;
 	int			ehk[3];

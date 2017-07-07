@@ -6,13 +6,13 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 05:36:00 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 04:27:14 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 05:20:52 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cd.h"
 
-char	cd_step6(char *destpath, char **env, t_opt *options)
+char	cd_step6(char *destpath, t_env *env, t_opt *options)
 {
 	char	*pwd;
 

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 23:48:53 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 04:26:37 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 05:17:11 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static t_opt 	*ft_get_cd_opt(char **argv)
 	return (options);
 }
 
-int				cd_start(char **argv, char **env)
+int				cd_start(char **argv, t_env *env)
 {
 	char		*working_path;
 	char		*destpath;

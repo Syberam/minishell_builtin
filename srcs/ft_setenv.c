@@ -6,13 +6,28 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 23:29:14 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 04:33:58 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 04:34:15 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include <minishell.h>
 
-char		*ft_get_var_name(char *varpath)
+void		set_newvar(char *newvar, t_env *env)
+{
+	t_env	*new;
+
+	new = (t_env *)ft_memalloc(sizeof(t_env));
+	new->var = ft_strdup(newvar);
+	while (env->next)
+	{
+		new->prev = env->prev->next;
+		env->prev->next = new;
+		env->prev = new;
+		new->next = env;
+	}
+}
+
+char		*var_name(char *varpath)
 {
 	char	*var_value;
 	char	*var_name;
@@ -23,36 +38,39 @@ char		*ft_get_var_name(char *varpath)
 	return (var_name);
 }
 
-size_t		ft_envlen(char **env)
+size_t		ft_envlen(t_env *env)
 {
 	size_t	len;
 
 	len = 0;
-	while (env[++len - 1])
-		;
+	while (env)
+	{
+		env = env->next;
+		len++;
+	}
 	return (len - 1);
 }
 
-char		**ft_setenv(char *new, char **env, int overwrite)
+t_env	*ft_setenv(char *new, t_env *env, int overwrite)
 {
-	char	**new_env;
-	char	*var_value;
-	size_t	env_len;
-	size_t	i;
+	t_env	*current;
 
-	if (overwrite)
-		return (env);
+	current = env;
 	if (!ft_strchr(new, '='))
 		return (env);
-	var_value = ft_getenv_var(new, env);
-	//if (ft_get
-	env_len = ft_envlen(env);
-	new_env = (char **)ft_memalloc(sizeof(char *) * (ft_envlen(env) + 2));
-	i = 0;
-	while ((++i - 1) < env_len)
-		new_env[i - 1] = env[i - 1];
-	new_env[i] = ft_strdup(new);
-	new_env[++i] = 0;
-	free(env);
-	return (new_env);
+	while (current)
+	{
+		if (!ft_strcmp(var_name(new), var_name(env->var)))
+		{
+			if (!overwrite)
+			{
+				free(env->var);
+				env->var = ft_strdup(new);
+			};
+			return (env);
+		}
+		current = current->next;
+	}
+	set_newvar(new, env);
+	return (env);
 }

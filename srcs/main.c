@@ -6,26 +6,47 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 00:33:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 23:46:04 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 04:39:02 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
-void			ft_doexec(char **av, char **env)
+char			**env_to_strtab(t_env *env)
+{
+	size_t	len;
+	char	**envtab;
+	int		i;
+
+	len = ft_envlen(env);
+	envtab = (char **)ft_memalloc(sizeof(char *) * (len + 1));
+	i = 0;
+	while (env)
+	{
+		envtab[i] = env->var;
+		i++;
+		env = env->next;
+	}
+	return (envtab);
+}
+
+void			ft_doexec(char **av, t_env *env)
 {
 		pid_t	father;
+		char	**envi;
 
+		
 		av[0] = ft_strmini(av[0]);
+		envi = env_to_strtab(env);
 		father = fork();
 		if (father > 0)
 			wait(0);
 		if (father == 0)
-			if (execve(av[0], av, env) == -1)
-				error_wgcmd(av[0]);
+			if (execve(av[0], av, envi) == -1)
+			error_wgcmd(av[0]);
 }
 
-void			ft_dobin(char **av, char **env)
+void			ft_dobin(char **av, t_env *env)
 {
 	int			ac;
 
@@ -51,26 +72,25 @@ void			ft_dobin(char **av, char **env)
 */
 }
 
-
 int					main(int argc, char **argv, char **env)
 {
 	char			**argvsplit;
 	char			*pwd;
 	int				i;
-	t_env			envi;
+	t_env			*envi;
 
 	i = argc;
-	pwd = ft_getenv_var("PWD", env);
 	envi = ft_getenv(env);
+	pwd = ft_getenv_var("PWD", envi);
 	while (42)
 	{
-		ft_putprompt(pwd, env);
+		ft_putprompt(pwd, envi);
 		if (gnl(0, argv))
 		{
 			if (!(argvsplit = ft_strsplit(argv[0], ' ')))
 				continue;
 			else if (argvsplit[0])
-				ft_dobin(argvsplit, env);
+				ft_dobin(argvsplit, envi);
 		}
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 18:46:06 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 04:14:46 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 05:18:34 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ typedef	struct			s_opt
 
 typedef	struct stat		t_stat;
 
-char					cd_step1(char *destpath, char **env, t_opt *options);
-char					cd_step2(char *destpath, char **env, t_opt *options);
-char					cd_step3(char *destpath, char **env, t_opt *options);
-char					cd_step4(char *destpath, char **env, t_opt *options);
-char					cd_step5(char *destpath, char **env, t_opt *options);
-char					cd_step6(char *destpath, char **env, t_opt *options);
-char					cd_step7(char *destpath, char **env, t_opt *options);
-char					cd_step8(char *destpath, char **env, t_opt *options);
+char					cd_step1(char *destpath, t_env *env, t_opt *options);
+char					cd_step2(char *destpath, t_env *env, t_opt *options);
+char					cd_step3(char *destpath, t_env *env, t_opt *options);
+char					cd_step4(char *destpath, t_env *env, t_opt *options);
+char					cd_step5(char *destpath, t_env *env, t_opt *options);
+char					cd_step6(char *destpath, t_env *env, t_opt *options);
+char					cd_step7(char *destpath, t_env *env, t_opt *options);
+char					cd_step8(char *destpath, t_env *env, t_opt *options);
 char					cd_step9(char *destpath);
-char					cd_step10(char *destpath, char **env, t_opt *options);
+char					cd_step10(char *destpath, t_env *env, t_opt *options);
 
-char					*ft_fill_destpath(char *destpath, char **env);
+char					*ft_fill_destpath(char *destpath, t_env *env);
 
 int						ft_cd_errors(char err_id, char *destpath);
 

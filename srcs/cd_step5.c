@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 01:52:18 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/06 04:16:55 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 05:20:29 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char		*ft_get_tmpdest(char *destpath, char **cdpaths)
 	return (tmp_dest);
 }
 
-static char		**ft_get_cdpaths(char **env)
+static char		**ft_get_cdpaths(t_env *env)
 {
 	char		*path_var;
 	char		**cdpaths;
@@ -50,7 +50,7 @@ static char		**ft_get_cdpaths(char **env)
 	return (cdpaths);
 }
 
-char			cd_step5(char *destpath, char **env, t_opt *options)
+char			cd_step5(char *destpath, t_env *env, t_opt *options)
 {	
 	char		**cdpaths;
 	char		*tmp_dest;
