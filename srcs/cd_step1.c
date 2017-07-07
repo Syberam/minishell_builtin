@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 18:44:58 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/07 07:51:19 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/07 08:06:11 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	cd_step1(char *destpath, t_env *env, t_opt *options)
 {
 	if (destpath && ft_strcmp(destpath, ""))
 		return (cd_step2(destpath, env, options));
-	return (CD_NOHOME);
+	return (CD_NOHOME); // IL Y A UNE COUILLE ICI
 }
 
 char		cd_step2(char *destpath, t_env *env, t_opt *options)
