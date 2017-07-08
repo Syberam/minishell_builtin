@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 00:33:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/07 04:39:02 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/08 06:04:23 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int					main(int argc, char **argv, char **env)
 	pwd = ft_getenv_var("PWD", envi);
 	while (42)
 	{
-		ft_putprompt(pwd, envi);
+		ft_putprompt(envi);
 		if (gnl(0, argv))
 		{
 			if (!(argvsplit = ft_strsplit(argv[0], ' ')))

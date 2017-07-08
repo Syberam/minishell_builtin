@@ -6,15 +6,18 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 05:28:42 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/07 05:24:31 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/08 06:05:27 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_putprompt(char *pwd, t_env *env)
+void	ft_putprompt(t_env *env)
 {
 	char	*user;
+	char	*pwd;
+
+	pwd = ft_getenv_var("PWD", env);
 
 	if (!(user = ft_getenv_var("LOGNAME", env)))
 		user = "User unknow";

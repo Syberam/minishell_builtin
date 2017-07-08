@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 23:47:16 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/07 05:28:18 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/08 05:49:19 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void			env_start(char **argv, t_env *env)
 			}	
 		}
 	}
+	// SI TROISIEME ARGUMENT l'executer
 	if (!ft_manage_env_opt(opts))
 		return ;
 	while (env)

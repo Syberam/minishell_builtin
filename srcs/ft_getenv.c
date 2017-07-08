@@ -6,11 +6,33 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 01:40:51 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/07 06:12:45 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/08 05:10:14 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+t_env		*ft_fill_empty_env()
+{
+	int		i;
+	t_env	*envbis;
+	t_env	*prenv;
+	t_env	*start;
+
+	i = 0;
+	start = (t_env *)ft_memalloc(sizeof(t_env));
+	start->var = ft_strjoin("PWD=", getcwd(start->var, 255));
+	envbis = (t_env *)ft_memalloc(sizeof(t_env));
+	start->next = envbis;
+	envbis->var = ft_strdup("SHLVL=1");
+	prenv = envbis;
+	envbis = (t_env *)ft_memalloc(sizeof(t_env));
+	envbis->prev = prenv;
+	prenv->next = envbis;
+	envbis->var = ft_strdup("_=/usr/bin/env");
+	prenv = start;
+	return (start);
+}
 
 void		ft_set_shlvl(t_env *env)
 {
@@ -60,6 +82,8 @@ t_env	*ft_getenv(char **env)
 	t_env	*start;
 
 	i = 0;
+	if (!env || !env[0])
+		return (ft_fill_empty_env());
 	start = (t_env *)ft_memalloc(sizeof(t_env));
 	start->var = ft_strdup(env[i++]);
 	prenv = start;

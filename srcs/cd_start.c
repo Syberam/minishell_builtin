@@ -6,7 +6,7 @@
 /*   By: sbonnefo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 23:48:53 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/07 05:17:11 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/08 03:40:07 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,10 @@ static t_opt 	*ft_get_cd_opt(char **argv)
 
 int				cd_start(char **argv, t_env *env)
 {
-	char		*working_path;
 	char		*destpath;
 	char		err;
 	t_opt		*options;
 
-	working_path = NULL;
-	working_path = getcwd(working_path, 256);
 	options = ft_get_cd_opt(argv);
 	if (options->oldp)
 	{
@@ -86,5 +83,6 @@ int				cd_start(char **argv, t_env *env)
 		destpath = ft_fill_destpath(argv[options->start], env);
 	if ((err = cd_step1(destpath, env, options)) < 1)
 		return (ft_cd_errors(err, destpath));
+	free(destpath);
 	return (1);
 }

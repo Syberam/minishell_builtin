@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 05:30:33 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/07 05:35:56 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/08 06:02:46 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef	struct		s_env
 	struct s_env	*prev ;
 }					t_env;
 
-void	ft_putprompt(char *pwd, t_env *env);
+void	ft_putprompt(t_env *env);
 void	ft_env(t_env *env);
 char	*ft_getenv_var(char *var, t_env *env);
 char	*ft_get_var_name(char *varpath);
