@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 00:15:17 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/07 07:51:52 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/08 06:23:31 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*ft_skip_extraslashes(char *destpath)
 	i = 0;
 	while (destpath[i])
 	{
-		if (destpath[i] == 47 && destpath[i + 1] == 47)
+		if (destpath[i] == 47 && (destpath[i + 1] == 47 || !destpath[i + 1]))
 		{
 			destpath_tmp =
 	ft_ext_strjoin_free(ft_strsub(destpath, 0, i), destpath + i + 1, 1);

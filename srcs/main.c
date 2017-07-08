@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 00:33:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/08 06:04:23 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/08 07:00:01 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,11 @@ int					main(int argc, char **argv, char **env)
 				continue;
 			else if (argvsplit[0])
 				ft_dobin(argvsplit, envi);
+			free(argvsplit[0]);
+			free(argvsplit);
+			free(argv[0]);
 		}
 	}
+	free(envi);
 	return (0);
 }
