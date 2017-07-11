@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 18:46:06 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/07 05:18:34 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/10 07:04:12 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 # include <sys/types.h>
 # include <dirent.h>
 # include <sys/stat.h>
+
 # define CD_SUCCESS			1
 # define CD_NOHOME			-1
 # define CD_WGDIR			-2
 # define CD_PERMDEN			-3
+# define CD_NOTDIR			-4
 # define CD_CHDIR_FAILURE	-10
 
 typedef	struct			s_opt
@@ -46,6 +48,6 @@ char					cd_step10(char *destpath, t_env *env, t_opt *options);
 
 char					*ft_fill_destpath(char *destpath, t_env *env);
 
-int						ft_cd_errors(char err_id, char *destpath);
+void						ft_cd_errors(char err_id, char *destpath);
 
 #endif

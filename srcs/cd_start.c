@@ -6,11 +6,11 @@
 /*   By: sbonnefo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 23:48:53 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/08 03:40:07 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/11 05:23:56 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cd.h"
+#include <cd.h>
 
 static void		ft_init_opt(t_opt *opts)
 {
@@ -21,10 +21,12 @@ static void		ft_init_opt(t_opt *opts)
 
 static t_opt	*ft_active_opt(char opt, t_opt *opts)
 {
-	if (opt == '-')
+	if (opt == '-' && opts->lastop)
+		opts->start--;
+	else if (opt == '-')
 	{
-		opts->p = 1;
-		opts->l = 0;
+		opts->p = 0;
+		opts->l = 1;
 		opts->lastop = 1;
 	}
 	else if (opt == 'P')
@@ -42,7 +44,7 @@ static t_opt	*ft_active_opt(char opt, t_opt *opts)
 	return (opts);
 }
 
-static t_opt 	*ft_get_cd_opt(char **argv)
+static t_opt	*ft_get_cd_opt(char **argv)
 {
 	size_t		i;
 	size_t		j;
@@ -56,7 +58,11 @@ static t_opt 	*ft_get_cd_opt(char **argv)
 	{
 		j = 0;
 		if (argv[i][1] == 0)
+		{
 			options->oldp = 1;
+			options->start++;
+			return (options);
+		}
 		while (argv[i][++j] != 0)
 			if (!ft_active_opt(argv[i][j], options))
 				return (options);
@@ -67,7 +73,7 @@ static t_opt 	*ft_get_cd_opt(char **argv)
 	return (options);
 }
 
-int				cd_start(char **argv, t_env *env)
+void			cd_start(char **argv, t_env *env)
 {
 	char		*destpath;
 	char		err;
@@ -76,13 +82,15 @@ int				cd_start(char **argv, t_env *env)
 	options = ft_get_cd_opt(argv);
 	if (options->oldp)
 	{
+		if (argv[options->start])
+			return (ft_putendl_fd("cd: string not in pwd: -", 2));
 		destpath = ft_getenv_var("OLDPWD", env);
-		ft_putendl(destpath);
 	}
 	else
 		destpath = ft_fill_destpath(argv[options->start], env);
 	if ((err = cd_step1(destpath, env, options)) < 1)
 		return (ft_cd_errors(err, destpath));
 	free(destpath);
-	return (1);
+	ft_memset((void *)options, 0, sizeof(t_opt));
+	free(options);
 }

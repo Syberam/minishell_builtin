@@ -6,21 +6,23 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 23:47:16 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/08 05:49:19 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/11 05:32:13 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../includes/minishell.h"
+#include <minishell.h>
 
-int				ft_manage_env_opt(t_env_opt	*opts)
+int				ft_manage_env_opt(t_env_opt *opts)
 {
 	if (opts->i)
 		return (0);
 	if (opts->v)
 	{
 		ft_putendl_fd("env: unsupported option -- v", 2);
-		ft_putendl_fd("usage: env [-i] [-P utilpath] [-S string] [-u name]", 2);
-		ft_putendl_fd("           [name=value ...] [utility [argument ...]]", 2);
+		ft_putendl_fd("usage: env [-i] [-P utilpath] [-S string] [-u name]",
+																			2);
+		ft_putendl_fd("           [name=value ...] [utility [argument ...]]",
+																			2);
 		return (0);
 	}
 	if (opts->wrg)
@@ -28,8 +30,10 @@ int				ft_manage_env_opt(t_env_opt	*opts)
 		ft_putstr_fd("env: illegal option -- ", 2);
 		ft_putchar_fd(opts->wrg, 2);
 		ft_putchar_fd('\n', 2);
-		ft_putendl_fd("usage: env [-i] [-P utilpath] [-S string] [-u name]", 2);
-		ft_putendl_fd("           [name=value ...] [utility [argument ...]]", 2);
+		ft_putendl_fd("usage: env [-i] [-P utilpath] [-S string] [-u name]",
+																			2);
+		ft_putendl_fd("           [name=value ...] [utility [argument ...]]",
+																			2);
 		return (0);
 	}
 	return (1);
@@ -53,8 +57,8 @@ void			env_start(char **argv, t_env *env)
 			else if (i != 1 || argv[1][i] != '-')
 			{
 				opts->wrg = argv[1][i];
-				break;
-			}	
+				break ;
+			}
 		}
 	}
 	// SI TROISIEME ARGUMENT l'executer

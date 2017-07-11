@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 00:33:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/08 07:00:01 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/11 08:46:23 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,16 @@ char			**env_to_strtab(t_env *env)
 
 void			ft_doexec(char **av, t_env *env)
 {
-		pid_t	father;
-		char	**envi;
+	pid_t	father;
+	char	**envi;
 
-		
-		av[0] = ft_strmini(av[0]);
-		envi = env_to_strtab(env);
-		father = fork();
-		if (father > 0)
-			wait(0);
-		if (father == 0)
-			if (execve(av[0], av, envi) == -1)
+	av[0] = ft_strmini(av[0]);
+	envi = env_to_strtab(env);
+	father = fork();
+	if (father > 0)
+		wait(0);
+	if (father == 0)
+		if (execve(av[0], av, envi) == -1)
 			error_wgcmd(av[0]);
 }
 
@@ -54,46 +53,47 @@ void			ft_dobin(char **av, t_env *env)
 	while (av[++ac - 1])
 		;
 	if (!(ft_strcmp(av[0], "exit")))
-		exit (0);
+		exit(0);
 	else if (!(ft_strcmp(av[0], "echo")))
-		echo_start(ac, av, env);
+		echo_start(av, env);
 	else if (!(ft_strcmp(av[0], "cd")))
 		cd_start(av, env);
 	else if (!(ft_strcmp(av[0], "env")))
 		env_start(av, env);
 	else if (!(ft_strcmp(av[0], "pwd")))
 		ft_putendl(getcwd(av[0], 255));
+	else if (!(ft_strcmp(av[0], "setenv")))
+		ft_setenv(av[1], env, 0);
+	else if (!(ft_strcmp(av[0], "unsetenv")))
+		ft_vars_to_unset(av, env);
 	else
 		ft_doexec(av, env);
-/*	if (!(ft_strcmp(av[0], "setenv")))
-		ft_binsetenv(av, env);
-	if (!(ft_strcmp(av[0], "unsetenv")))
-		ft_binunsetenv(av, env);i
-*/
 }
 
-int					main(int argc, char **argv, char **env)
+int				main(int argc, char **argv, char **env)
 {
-	char			**argvsplit;
-	char			*pwd;
-	int				i;
-	t_env			*envi;
+	char		**argvsplit;
+	char		*pwd;
+	t_env		*envi;
 
-	i = argc;
-	envi = ft_getenv(env);
+	if (!(envi = ft_getenv(env)))
+		return (0);
 	pwd = ft_getenv_var("PWD", envi);
-	while (42)
+	while (argc)
 	{
 		ft_putprompt(envi);
 		if (gnl(0, argv))
 		{
 			if (!(argvsplit = ft_strsplit(argv[0], ' ')))
+			{
+				ft_freetab((void **)argvsplit);
+				ft_freetab((void **)argv);
 				continue;
+			}
 			else if (argvsplit[0])
 				ft_dobin(argvsplit, envi);
-			free(argvsplit[0]);
-			free(argvsplit);
-			free(argv[0]);
+			ft_freetab((void **)argvsplit);
+			ft_freetab((void **)argv);
 		}
 	}
 	free(envi);

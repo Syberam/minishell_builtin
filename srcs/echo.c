@@ -6,13 +6,13 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 22:30:57 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/07 02:02:41 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/11 05:12:57 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/echo.h"
 
-char			*ft_makeconv(char *str, int i, int j, int *ehk)
+char			*ft_makeconv(char *str, int i, int j, size_t *ehks)
 {
 	char		*specials;
 	char		*sp_ascode;
@@ -25,7 +25,7 @@ char			*ft_makeconv(char *str, int i, int j, int *ehk)
 		{
 			str[i - 1] = sp_ascode[j - 1];
 			if (j - 1 == 2)
-				ehk[2] = 1;
+				ehks[2] = 1;
 			if (j - 1 == 2)
 				return (str);
 			str = ft_ext_strjoin_free(ft_strsub(str, 0, i), str + i + 1, 1);
@@ -35,7 +35,7 @@ char			*ft_makeconv(char *str, int i, int j, int *ehk)
 	return (str);
 }
 
-char			*ft_convstr(char *av, int *ehk, t_env *env)
+char			*ft_convstr(char *av, size_t *ehks, t_env *env)
 {
 	size_t		i;
 	size_t		j;
@@ -52,39 +52,69 @@ char			*ft_convstr(char *av, int *ehk, t_env *env)
 		if (cpy[i - 1] != 92)
 			continue;
 		j = 0;
-		cpy = ft_makeconv(cpy, i, j, ehk);
+		if (ehks[3] == 1)
+			cpy = ft_makeconv(cpy, i, j, ehks);
 	}
 	return (cpy);
 }
 
+size_t			ft_setopt(char **argv, size_t *ehks)
+{
+	size_t		i;
+	size_t		j;
+
+	ehks[2] = 0;
+	ehks[3] = 0;
+	i = 0;
+	j = 0;
+	while (argv[++i])
+	{
+		if (argv[i][0] != '-')
+			return (i - 1);
+		j = 0;
+		if (!argv[i][1] || argv[i][1] == ' ')
+			return (i - 1);
+		while (argv[i][++j])
+		{
+			if (argv[i][j] == 'n')
+				ehks[0] = 1;
+			if (argv[i][j] == 'e')
+				ehks[3] = 1;
+			if (argv[i][j] == '-')
+				return (i - 1);
+		}
+	}
+	return (i - 1);
+}
+
 /*
-** ehk for Enter Hyphen Kill
+** ehks for Enter Hyphen Kill Special
 */
 
-int				echo_start(int argc, char **argv, t_env *env)
+int				echo_start(char **argv, t_env *env)
 {
 	char		*cpy;
-	int			ehk[3];
-	int			i;
+	size_t		ehks[4];
+	size_t		i;
+	size_t		j;
 
-	i = 0;
-	while (++i < argc)
+	ehks[0] = 0;
+	ehks[1] = 0;
+	i = ft_setopt(argv, ehks);
+	j = i + 1;
+	if (!argv[1])
+		return (0);
+	while (argv[++i])
 	{
-		if (i == 1 && !ft_strcmp(argv[i], "-n\0"))
-			ehk[0] = 3 - (++i);
-		if (i == 1 && !ft_strcmp(argv[i], "-\0"))
-			ehk[1] = 3 - (++i);
-		if (i > 1 + ehk[0] + ehk[1])
+		if (i > j)
 			ft_putchar(' ');
-		cpy = ft_convstr(argv[i], ehk, env);
+		cpy = ft_convstr(argv[i], ehks, env);
 		ft_putstr(cpy);
-		//free(cpy);
-		ehk[0] = 0;
-		ehk[1] = 0;
-		if (ehk[2] == 1)
+		free(cpy);
+		if (ehks[2] == 1)
 			return (0);
 	}
-	if (ehk[0] == 0)
+	if (ehks[0] == 0)
 		ft_putchar('\n');
 	return (0);
 }

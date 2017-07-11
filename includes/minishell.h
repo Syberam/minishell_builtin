@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 05:30:33 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/08 06:02:46 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/11 08:34:43 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,24 @@ typedef	struct		s_env
 
 void	ft_putprompt(t_env *env);
 void	ft_env(t_env *env);
+void	cd_start(char **av, t_env *env);
+void	env_start(char **av, t_env *env);
+void	error_wgcmd(char *cmd);
+void	ft_vars_to_unset(char **names, t_env *env);
+void	ft_freetab(void **tab);
+
+size_t	ft_envlen(t_env *env);
+size_t	value_poz(char	*varline);
+int		echo_start(char **av, t_env *env);
+
 char	*ft_getenv_var(char *var, t_env *env);
 char	*ft_get_var_name(char *varpath);
+char	*ft_storenv(char *var, t_env *env);
+
+char	**ft_sentsplit(char *sentence);
+
 t_env	*ft_getenv(char **env);
 t_env	*ft_setenv(char *newvar, t_env *env, int overwrite);
-char	**ft_unsetenv(const char *name, t_env *env);
-size_t	ft_envlen(t_env *env);
-char	*ft_storenv(char *var, t_env *env);
-char	**ft_sentsplit(char *sentence);
-int		cd_start(char **av, t_env *env);
-int		echo_start(int ac, char **av, t_env *env);
-void	error_wgcmd(char *cmd);
-void	env_start(char **av, t_env *env);
+t_env	*ft_unsetenv(const char *names, t_env *env);
 
 #endif

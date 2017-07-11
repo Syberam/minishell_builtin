@@ -6,36 +6,32 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 23:29:14 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/07 04:34:15 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/11 08:29:12 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void		set_newvar(char *newvar, t_env *env)
+static void		set_newvar(char *newvar, t_env *env)
 {
 	t_env	*new;
 
 	new = (t_env *)ft_memalloc(sizeof(t_env));
 	new->var = ft_strdup(newvar);
 	while (env->next)
-	{
-		new->prev = env->prev->next;
-		env->prev->next = new;
-		env->prev = new;
-		new->next = env;
-	}
+		env = env->next;
+	env->next = new;
+	new->prev = env;
 }
 
-char		*var_name(char *varpath)
+size_t		value_poz(char *varline)
 {
-	char	*var_value;
-	char	*var_name;
+	size_t	i;
 
-	if (!(var_value = ft_strchr(varpath, '=')))
-		return (NULL);
-	var_name = ft_strsub(varpath, 0, ft_strlen(varpath) - ft_strlen(var_value));
-	return (var_name);
+	i = 0;
+	while (varline[i] && varline[i] != '=')
+		i++;
+	return (i);
 }
 
 size_t		ft_envlen(t_env *env)
@@ -55,19 +51,22 @@ t_env	*ft_setenv(char *new, t_env *env, int overwrite)
 {
 	t_env	*current;
 
-	current = env;
-	if (!ft_strchr(new, '='))
+	if (!new || !ft_strchr(new, '='))
 		return (env);
+	current = env;
 	while (current)
 	{
-		if (!ft_strcmp(var_name(new), var_name(env->var)))
+		if (value_poz(new) == value_poz(current->var))
 		{
-			if (!overwrite)
+			if (!ft_strncmp(new, current->var, value_poz(new)))
 			{
-				free(env->var);
-				env->var = ft_strdup(new);
-			};
-			return (env);
+				if (!overwrite)
+				{
+					free(current->var);
+					current->var = ft_strdup(new);
+				}
+				return (env);
+			}
 		}
 		current = current->next;
 	}

@@ -6,13 +6,13 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 01:40:51 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/08 05:10:14 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/11 05:09:49 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include <minishell.h>
 
-t_env		*ft_fill_empty_env()
+t_env		*ft_fill_empty_env(void)
 {
 	int		i;
 	t_env	*envbis;
@@ -50,11 +50,11 @@ void		ft_set_shlvl(t_env *env)
 			env->var = newshlvl;
 			return ;
 		}
-	env = env->next;
+		env = env->next;
 	}
 }
 
-char	*ft_getenv_var(char *var, t_env *env)
+char		*ft_getenv_var(char *var, t_env *env)
 {
 	char	*tofind;
 	int		i;
@@ -74,7 +74,7 @@ char	*ft_getenv_var(char *var, t_env *env)
 	return (NULL);
 }
 
-t_env	*ft_getenv(char **env)
+t_env		*ft_getenv(char **env)
 {
 	int		i;
 	t_env	*envbis;
