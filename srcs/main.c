@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 00:33:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/11 08:46:23 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/11 10:29:23 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,29 +72,35 @@ void			ft_dobin(char **av, t_env *env)
 
 int				main(int argc, char **argv, char **env)
 {
-	char		**argvsplit;
+	char		**linesplit;
 	char		*pwd;
+	char		*line;
 	t_env		*envi;
 
+	(void)argv;
 	if (!(envi = ft_getenv(env)))
 		return (0);
 	pwd = ft_getenv_var("PWD", envi);
+	line = NULL;
 	while (argc)
 	{
+		signal(SIGINT, ft_handler_father);
 		ft_putprompt(envi);
-		if (gnl(0, argv))
+		if (gnl(0, &line))
 		{
-			if (!(argvsplit = ft_strsplit(argv[0], ' ')))
+			if (!(linesplit = ft_strsplit(line, ' ')))
 			{
-				ft_freetab((void **)argvsplit);
-				ft_freetab((void **)argv);
+		//		ft_freetab((void **)linesplit);
+		//		free((void *)line);
 				continue;
 			}
-			else if (argvsplit[0])
-				ft_dobin(argvsplit, envi);
-			ft_freetab((void **)argvsplit);
-			ft_freetab((void **)argv);
+			else if (linesplit[0])
+				ft_dobin(linesplit, envi);
+		//	ft_freetab((void **)linesplit);
+		//	free((void *)line);
 		}
+		else
+			exit(0);
 	}
 	free(envi);
 	return (0);
