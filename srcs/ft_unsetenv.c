@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 23:31:15 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/11 08:29:07 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/12 08:35:34 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ t_env	*ft_unsetenv(const char *name, t_env *env)
 		{
 			if (!ft_strncmp(name, current->var, value_poz((char *)name)))
 			{
-					if (current->prev)
-						current->prev->next = current->next;
-					if (current->next)
-						current->next->prev = current->prev;
-					ft_bzero(current->var, ft_strlen(current->var));
-					ft_memdel(((void *)current->var));
-					ft_memset(current, 0, sizeof(current));
-					ft_memdel((void *)current);
+				if (current->prev)
+					current->prev->next = current->next;
+				if (current->next)
+					current->next->prev = current->prev;
+				ft_bzero(current->var, ft_strlen(current->var));
+				ft_memdel(((void *)current->var));
+				ft_memset(current, 0, sizeof(current));
+				ft_memdel((void *)current);
 				return (env);
 			}
 		}

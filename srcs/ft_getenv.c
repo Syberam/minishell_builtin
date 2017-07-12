@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 01:40:51 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/11 05:09:49 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/12 04:52:35 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,13 @@ char		*ft_getenv_var(char *var, t_env *env)
 	tofind = ft_strjoin(var, "=");
 	while (env)
 	{
-		if (ft_strstr(env->var, tofind))
+		if (!ft_strncmp(env->var, tofind, value_poz(tofind)))
 		{
-			free(tofind);
-			return (ft_strchr(env->var, '=') + 1);
+			if (ft_strstr(env->var, tofind))
+			{
+				free(tofind);
+				return (ft_strchr(env->var, '=') + 1);
+			}
 		}
 		env = env->next;
 	}

@@ -6,7 +6,7 @@
 #    By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/06 04:01:59 by sbonnefo          #+#    #+#              #
-#    Updated: 2017/07/11 09:50:46 by sbonnefo         ###   ########.fr        #
+#    Updated: 2017/07/11 23:44:09 by sbonnefo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ FLAGS = -g -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(OBJ) $(LIB_MLX)
+$(NAME): $(LIB) $(OBJ) $(LIB_MLX) Makefile
 	@gcc $(FLAGS) -o $(NAME) $(LIB) $(OBJ)
 	@echo "$(NAME) \033[30;42mmade\033[0m"
 

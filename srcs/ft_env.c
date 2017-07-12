@@ -6,13 +6,23 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 23:47:16 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/11 05:32:13 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/12 08:38:58 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int				ft_manage_env_opt(t_env_opt *opts)
+static void		print_env(t_env *env)
+{
+	while (env)
+	{
+		if (env->var)
+			ft_putendl(env->var);
+		env = env->next;
+	}
+}
+
+static int		ft_manage_env_opt(t_env_opt *opts)
 {
 	if (opts->i)
 		return (0);
@@ -61,14 +71,8 @@ void			env_start(char **argv, t_env *env)
 			}
 		}
 	}
-	// SI TROISIEME ARGUMENT l'executer
 	if (!ft_manage_env_opt(opts))
 		return ;
-	while (env)
-	{
-		if (env->var)
-			ft_putendl(env->var);
-		env = env->next;
-	}
+	print_env(env);
 	free(opts);
 }

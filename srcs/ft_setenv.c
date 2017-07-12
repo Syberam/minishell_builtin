@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 23:29:14 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/11 08:29:12 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/12 08:40:26 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		set_newvar(char *newvar, t_env *env)
 {
-	t_env	*new;
+	t_env		*new;
 
 	new = (t_env *)ft_memalloc(sizeof(t_env));
 	new->var = ft_strdup(newvar);
@@ -24,9 +24,9 @@ static void		set_newvar(char *newvar, t_env *env)
 	new->prev = env;
 }
 
-size_t		value_poz(char *varline)
+size_t			value_poz(char *varline)
 {
-	size_t	i;
+	size_t		i;
 
 	i = 0;
 	while (varline[i] && varline[i] != '=')
@@ -34,9 +34,9 @@ size_t		value_poz(char *varline)
 	return (i);
 }
 
-size_t		ft_envlen(t_env *env)
+size_t			ft_envlen(t_env *env)
 {
-	size_t	len;
+	size_t		len;
 
 	len = 0;
 	while (env)
@@ -47,9 +47,9 @@ size_t		ft_envlen(t_env *env)
 	return (len - 1);
 }
 
-t_env	*ft_setenv(char *new, t_env *env, int overwrite)
+t_env			*ft_setenv(char *new, t_env *env, int overwrite)
 {
-	t_env	*current;
+	t_env		*current;
 
 	if (!new || !ft_strchr(new, '='))
 		return (env);

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 22:30:57 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/11 05:12:57 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/12 08:31:06 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,12 @@ char			*ft_convstr(char *av, size_t *ehks, t_env *env)
 	if (!av)
 		return ("\0");
 	if (av[0] == '$')
-		return (ft_strdup(ft_getenv_var(av + 1, env)));
+	{
+		if (ft_getenv_var(av + 1, env))
+			return (ft_strdup(ft_getenv_var(av + 1, env)));
+		else
+			return (ft_strdup(""));
+	}
 	cpy = ft_strdup(av);
 	i = 0;
 	while (cpy[++i - 1])
@@ -95,20 +100,21 @@ int				echo_start(char **argv, t_env *env)
 {
 	char		*cpy;
 	size_t		ehks[4];
-	size_t		i;
-	size_t		j;
+	size_t		ij[2];
 
 	ehks[0] = 0;
 	ehks[1] = 0;
-	i = ft_setopt(argv, ehks);
-	j = i + 1;
+	ij[0] = ft_setopt(argv, ehks);
+	ij[1] = ij[0] + 1;
+	if (!argv[1])
+		ft_putchar('\n');
 	if (!argv[1])
 		return (0);
-	while (argv[++i])
+	while (argv[++ij[0]])
 	{
-		if (i > j)
+		if (ij[0] > ij[1])
 			ft_putchar(' ');
-		cpy = ft_convstr(argv[i], ehks, env);
+		cpy = ft_convstr(argv[ij[0]], ehks, env);
 		ft_putstr(cpy);
 		free(cpy);
 		if (ehks[2] == 1)

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 00:33:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/11 10:29:23 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/12 08:41:08 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void			ft_dobin(char **av, t_env *env)
 	else if (!(ft_strcmp(av[0], "env")))
 		env_start(av, env);
 	else if (!(ft_strcmp(av[0], "pwd")))
-		ft_putendl(getcwd(av[0], 255));
+		ft_putendl(ft_getenv_var("PWD", env));
 	else if (!(ft_strcmp(av[0], "setenv")))
-		ft_setenv(av[1], env, 0);
+		ft_setenv(av[1], env, 1);
 	else if (!(ft_strcmp(av[0], "unsetenv")))
 		ft_vars_to_unset(av, env);
 	else
@@ -75,6 +75,7 @@ int				main(int argc, char **argv, char **env)
 	char		**linesplit;
 	char		*pwd;
 	char		*line;
+	char		*linebis;
 	t_env		*envi;
 
 	(void)argv;
@@ -88,16 +89,19 @@ int				main(int argc, char **argv, char **env)
 		ft_putprompt(envi);
 		if (gnl(0, &line))
 		{
-			if (!(linesplit = ft_strsplit(line, ' ')))
+			linebis = ft_strtrim(line);
+			ft_bzero(line, ft_strlen(line));
+			free(line);
+			line = linebis;
+			linesplit = ft_strsplit(line, ' ');
+			if (linesplit && linesplit[0])
 			{
-		//		ft_freetab((void **)linesplit);
-		//		free((void *)line);
-				continue;
-			}
-			else if (linesplit[0])
 				ft_dobin(linesplit, envi);
-		//	ft_freetab((void **)linesplit);
-		//	free((void *)line);
+				free(linesplit);
+				linesplit = NULL;
+			}
+			free(line);
+			line = NULL;
 		}
 		else
 			exit(0);
