@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 08:29:23 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/12 02:24:25 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 00:45:50 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ void	ft_freetab(void **tab)
 
 	if (!tab)
 		return ;
-	i = -1;
+	i = -1;;
 	while (tab[++i])
-	{
-		ft_memdel(tab[i]);
-	}
+		free((void *)tab[i]);
 	ft_memdel(tab);
 }
