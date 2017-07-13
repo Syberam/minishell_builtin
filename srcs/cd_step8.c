@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 00:15:17 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/11 02:30:53 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 11:13:31 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*ft_skip_extradotdot(char *destpath)
 			destpath_tmp = ft_ext_strjoin_free(ft_strsub(destpath, 0, i + 1),
 								destpath_tmp, 2);
 			ft_bzero(destpath, ft_strlen(destpath));
-			free(destpath);
+			ft_memdel((void **)&destpath);
 			destpath = destpath_tmp;
 		}
 		else
@@ -55,7 +55,7 @@ static char	*ft_skip_extraslashes(char *destpath)
 			destpath_tmp =
 	ft_ext_strjoin_free(ft_strsub(destpath, 0, i), destpath + i + 1, 1);
 			ft_bzero(destpath, ft_strlen(destpath));
-			free(destpath);
+			ft_memdel((void **)&destpath);
 			destpath = destpath_tmp;
 		}
 		else
@@ -78,7 +78,7 @@ static char	*ft_skip_dot(char *destpath)
 			destpath_tmp =
 	ft_ext_strjoin_free(ft_strsub(destpath, 0, i - 1), destpath + i + 1, 1);
 			ft_bzero(destpath, ft_strlen(destpath));
-			free(destpath);
+			ft_memdel((void **)&destpath);
 			destpath = destpath_tmp;
 		}
 		else

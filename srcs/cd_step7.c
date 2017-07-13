@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 23:41:13 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/11 05:25:53 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 15:29:57 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char		cd_step7_opp(char *destpath, t_env *env)
 	ft_setenv(oldpwd, env, 1);
 	ft_setenv(destpath, env, 1);
 	ft_bzero(destpath, ft_strlen(destpath));
-	free(destpath);
+	ft_memdel((void **)&destpath);
 	return (CD_SUCCESS);
 }
 
@@ -35,6 +35,6 @@ char		cd_step7(char *destpath, t_env *env, t_opt *options)
 	working_dir = NULL;
 	if (destpath[0] != '/')
 		destpath = ft_ext_strjoin_free(getcwd(working_dir, 256),
-							ft_ext_strjoin_free("/", destpath, 2), 2);
+							ft_ext_strjoin_free("/", destpath, 0), 2);
 	return (cd_step8(destpath, env, options));
 }

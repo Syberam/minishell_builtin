@@ -6,7 +6,7 @@
 /*   By: sbonnefo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 23:48:53 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/11 05:23:56 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 11:12:01 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void			cd_start(char **argv, t_env *env)
 		destpath = ft_fill_destpath(argv[options->start], env);
 	if ((err = cd_step1(destpath, env, options)) < 1)
 		return (ft_cd_errors(err, destpath));
-	free(destpath);
+	ft_memdel((void **)&destpath);
 	ft_memset((void *)options, 0, sizeof(t_opt));
-	free(options);
+	ft_memdel((void **)&options);
 }

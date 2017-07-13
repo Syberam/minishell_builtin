@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 00:05:50 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/12 08:31:52 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 16:12:58 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char			cd_step10(char *destpath, t_env *env, t_opt *options)
 	pwd = getcwd(pwd, 255);
 	if ((chdir(destpath)) == -1)
 	{
-		free(pwd);
+		ft_memdel((void **)&pwd);
 		return (CD_CHDIR_FAILURE);
 	}
 	if (options->oldp)

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 01:40:51 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/12 04:52:35 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 10:50:37 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		ft_set_shlvl(t_env *env)
 			shlvl = ft_atoi(ft_strchr(env->var, '=') + 1);
 			newshlvl = ft_ext_strjoin_free("SHLVL=", ft_itoa(shlvl + 1), 2);
 			ft_bzero((void *)env->var, (size_t)ft_strlen(env->var));
-			free(env->var);
+			ft_memdel((void **)&env->var);
 			env->var = newshlvl;
 			return ;
 		}
@@ -67,13 +67,13 @@ char		*ft_getenv_var(char *var, t_env *env)
 		{
 			if (ft_strstr(env->var, tofind))
 			{
-				free(tofind);
+				ft_memdel((void **)&tofind);
 				return (ft_strchr(env->var, '=') + 1);
 			}
 		}
 		env = env->next;
 	}
-	free(tofind);
+	ft_memdel((void **)&tofind);
 	return (NULL);
 }
 

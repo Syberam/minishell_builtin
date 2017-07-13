@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 05:30:33 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/12 08:53:49 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 04:55:51 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void				cd_start(char **av, t_env *env);
 void				env_start(char **av, t_env *env);
 void				error_wgcmd(char *cmd);
 void				ft_vars_to_unset(char **names, t_env *env);
-void				ft_freetab(void **tab);
+void				ft_freetab(char **tab);
 void				ft_handler_father(int sig);
 void				ft_handler_child(int sig);
 

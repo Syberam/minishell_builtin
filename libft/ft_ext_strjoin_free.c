@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 18:06:08 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/01/31 16:56:20 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 08:39:56 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static size_t	ft_strlen_pr(char const *s)
 static void		ft_free_join(char const *s1, char const *s2, size_t mal)
 {
 	if (mal == 1 || mal == 3)
-		free((void **)s1);
+		ft_memdel((void **)&s1);
 	if (mal == 2 || mal == 3)
-		free((void **)s2);
+		ft_memdel((void **)&s2);
 }
 
 static char		*ft_monojoin(char const *s1, char const *s2, size_t mal)

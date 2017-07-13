@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 23:47:16 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/12 08:38:58 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 10:51:29 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void			env_start(char **argv, t_env *env)
 	if (!ft_manage_env_opt(opts))
 		return ;
 	print_env(env);
-	free(opts);
+	ft_memdel((void **)&opts);
 }

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 01:52:18 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/11 05:27:36 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 11:16:39 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char		*ft_get_tmpdest(char *destpath, char **cdpaths)
 		if ((lstat(tmp_dest, &dir_stat)) && S_ISDIR(dir_stat.st_mode))
 			break ;
 		ft_bzero(tmp_dest, ft_strlen(tmp_dest));
-		free(tmp_dest);
+		ft_memdel((void **)&tmp_dest);
 		tmp_dest = 0;
 	}
 	return (tmp_dest);
@@ -62,13 +62,8 @@ char			cd_step5(char *destpath, t_env *env, t_opt *options)
 		return (cd_step7(destpath, env, options));
 	i = 0;
 	ft_bzero(destpath, ft_strlen(destpath));
-	free(destpath);
-	while (cdpaths[i])
-	{
-		free(cdpaths[i]);
-		i++;
-	}
-	free(cdpaths);
+	ft_memdel((void **)&destpath);
+	ft_freetab(cdpaths);
 	destpath = tmp_dest;
 	return (cd_step7(destpath, env, options));
 }

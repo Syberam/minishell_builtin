@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 00:33:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/13 01:02:54 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 13:42:05 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,32 @@ void			ft_doexec(char **av, t_env *env)
 {
 	pid_t	father;
 	char	**envi;
+	char	**cmds;
+	int		i;
 
+	cmds = ft_strsplit(ft_getenv_var("PATH", env), ':');
+	i = -1;
+	while (cmds[++i])
+	{
+		cmds[i] = ft_ext_strjoin_free(cmds[i], "/", 1);
+		cmds[i] = ft_ext_strjoin_free(cmds[i], av[0], 1);
+	}
 	av[0] = ft_strmini(av[0]);
 	envi = env_to_strtab(env);
 	father = fork();
 	if (father > 0)
 		wait(0);
 	if (father == 0)
-		if (execve(av[0], av, envi) == -1)
-			error_wgcmd(av[0]);
+	{
+		i = 0;
+		while (execve(cmds[i], av, envi) == -1)
+		{
+			if (!cmds[++i])
+				error_wgcmd(av[0]);
+		}
+	}
+	ft_freetab(cmds);
+	ft_memdel((void **)&envi);
 }
 
 void			ft_dobin(char **av, t_env *env)
@@ -87,25 +104,25 @@ int				main(int argc, char **argv, char **env)
 	{
 		signal(SIGINT, ft_handler_father);
 		ft_putprompt(envi);
-		if (gnl(0, &line))
+		if (gnl(0, &line) == 1)
 		{
 			linebis = ft_strtrim(line);
 			ft_bzero(line, ft_strlen(line));
-			free(line);
+			ft_memdel((void **)&line);
 			line = linebis;
 			linesplit = ft_strsplit(line, ' ');
 			if (linesplit && linesplit[0])
-			{
-				ft_dobin(&*linesplit, &*envi);
-				linesplit = NULL;
-			}
-			ft_freetab((void **)linesplit);
-			free(line);
+				ft_dobin(linesplit, &*envi);
+			ft_freetab(linesplit);
+			ft_memdel((void **)&line);
 			line = NULL;
 		}
 		else
+		{
+		//	ft_putstr("\b\r\n");
 			exit(0);
+		}
 	}
-	free(envi);
+	ft_memdel((void **)&envi);
 	return (0);
 }

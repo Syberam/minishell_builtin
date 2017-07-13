@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 22:30:57 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/12 08:31:06 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/13 10:59:58 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int				echo_start(char **argv, t_env *env)
 			ft_putchar(' ');
 		cpy = ft_convstr(argv[ij[0]], ehks, env);
 		ft_putstr(cpy);
-		free(cpy);
+		ft_memdel((void **)&cpy);
 		if (ehks[2] == 1)
 			return (0);
 	}
