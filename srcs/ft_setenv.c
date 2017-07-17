@@ -17,7 +17,7 @@ static void		set_newvar(char *newvar, t_env *env)
 	t_env		*new;
 
 	new = (t_env *)ft_memalloc(sizeof(t_env));
-	new->var = ft_strdup(newvar);
+	new->var = newvar;
 	while (env->next)
 		env = env->next;
 	env->next = new;
@@ -47,27 +47,27 @@ size_t			ft_envlen(t_env *env)
 	return (len - 1);
 }
 
-t_env			*ft_setenv(char *new, t_env *env, int overwrite)
+t_env			*ft_setenv(char *new, t_env *env)
 {
 	t_env		*current;
 
-	if (!new || !ft_strchr(new, '='))
+	if (!new)
 		return (env);
+	if (!ft_strchr(new, '='))
+	{
+		ft_memdel((void **)&new);
+		return (env);
+	}
 	current = env;
 	while (current)
 	{
 		if (value_poz(new) == value_poz(current->var))
-		{
 			if (!ft_strncmp(new, current->var, value_poz(new)))
 			{
-				if (!overwrite)
-				{
-					ft_memdel((void **)&current->var);
-					current->var = ft_strdup(new);
-				}
+				ft_memdel((void **)&current->var);
+				current->var = new;
 				return (env);
 			}
-		}
 		current = current->next;
 	}
 	set_newvar(new, env);

@@ -19,12 +19,14 @@ char		cd_step7_opp(char *destpath, t_env *env)
 	oldpwd = NULL;
 	oldpwd = getcwd(oldpwd, 255);
 	if (!(chdir(destpath) == -1))
+	{
+		ft_memdel((void **)&destpath);
 		return (CD_CHDIR_FAILURE);
-	oldpwd = ft_strcat("OLDPWD=", oldpwd);
-	ft_setenv(oldpwd, env, 1);
-	ft_setenv(destpath, env, 1);
-	ft_bzero(destpath, ft_strlen(destpath));
-	ft_memdel((void **)&destpath);
+	}
+	oldpwd = ft_ext_strjoin_free("OLDPWD=", oldpwd, 2);
+	ft_setenv(oldpwd, env);
+	destpath = ft_ext_strjoin_free("PWD=", destpath, 2);
+	ft_setenv(destpath, env);
 	return (CD_SUCCESS);
 }
 
@@ -35,6 +37,6 @@ char		cd_step7(char *destpath, t_env *env, t_opt *options)
 	working_dir = NULL;
 	if (destpath[0] != '/')
 		destpath = ft_ext_strjoin_free(getcwd(working_dir, 256),
-							ft_ext_strjoin_free("/", destpath, 0), 2);
+							ft_ext_strjoin_free("/", destpath, 2), 3);
 	return (cd_step8(destpath, env, options));
 }

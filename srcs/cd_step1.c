@@ -14,7 +14,7 @@
 
 char		*ft_fill_destpath(char *destpath, t_env *env)
 {
-	if (destpath)
+	if (destpath || ft_strcmp(destpath, ""))
 		return (destpath);
 	return (ft_getenv_var("HOME", env));
 }

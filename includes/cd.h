@@ -48,6 +48,6 @@ char					cd_step10(char *destpath, t_env *env, t_opt *options);
 
 char					*ft_fill_destpath(char *destpath, t_env *env);
 
-void					ft_cd_errors(char err_id, char *destpath);
+void					ft_cd_errors(char err_id, char *destpath, t_opt *opti);
 
 #endif

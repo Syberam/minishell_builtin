@@ -23,8 +23,8 @@ static char		*ft_get_tmpdest(char *destpath, char **cdpaths)
 	{
 		if (ft_strcmp(cdpaths[i - 1], ""))
 			tmp_dest = (cdpaths[i - 1][ft_strlen(cdpaths[i - 1])] == '/') ?
-		ft_strjoin(cdpaths[i - 1], destpath) :
-	ft_ext_strjoin_free(ft_strjoin(cdpaths[i - 1], "/"), destpath, 1);
+		ft_ext_strjoin_free(cdpaths[i - 1], destpath, 2) :
+	ft_ext_strjoin_free(ft_strjoin(cdpaths[i - 1], "/"), destpath, 3);
 		else if (i - 1 == 0)
 			tmp_dest = ft_strjoin("./", destpath);
 		else
@@ -33,7 +33,7 @@ static char		*ft_get_tmpdest(char *destpath, char **cdpaths)
 			break ;
 		ft_bzero(tmp_dest, ft_strlen(tmp_dest));
 		ft_memdel((void **)&tmp_dest);
-		tmp_dest = 0;
+		tmp_dest = NULL;
 	}
 	return (tmp_dest);
 }

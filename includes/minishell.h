@@ -53,7 +53,7 @@ char				*ft_storenv(char *var, t_env *env);
 char				**ft_sentsplit(char *sentence);
 
 t_env				*ft_getenv(char **env);
-t_env				*ft_setenv(char *newvar, t_env *env, int overwrite);
+t_env				*ft_setenv(char *newvar, t_env *env);
 t_env				*ft_unsetenv(const char *names, t_env *env);
 
 #endif

@@ -19,16 +19,16 @@ char	cd_step6(char *destpath, t_env *env, t_opt *options)
 	size_t	len_dad;
 
 	pwd = NULL;
-	if (!ft_strcmp(destpath, ".\0") || !ft_strcmp(destpath, "\0"))
+	if (!ft_strcmp(destpath, ".\0"))
 	{
-	//	ft_memdel((void **)&destpath);
+		ft_memdel((void **)&destpath);
 		destpath = getcwd(destpath, 255);
 	}
 	else if (!ft_strcmp(destpath, "..\0"))
 	{
 		pwd = getcwd(pwd, 255);
 		len_cur = ft_strlen(ft_strrchr(pwd, '/'));
-		len_dad = ft_strlen(pwd) - len_cur;
+		len_dad = ft_strlen(pwd) - len_cur == 0 ? 1 : ft_strlen(pwd) - len_cur;
 		ft_memdel((void **)&destpath);
 		destpath = ft_strsub(pwd, 0, len_dad);
 		ft_memdel((void **)&pwd);

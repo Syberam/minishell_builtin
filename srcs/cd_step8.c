@@ -47,6 +47,8 @@ static char	*ft_skip_extraslashes(char *destpath)
 	char	*destpath_tmp;
 
 	i = 0;
+	if (ft_strlen(destpath) == 1)
+		return (destpath);
 	while (destpath[i])
 	{
 		if (destpath[i] == 47 && (destpath[i + 1] == 47

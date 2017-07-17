@@ -84,12 +84,12 @@ void			cd_start(char **argv, t_env *env)
 	{
 		if (argv[options->start])
 			return (ft_putendl_fd("cd: string not in pwd: -", 2));
-		destpath = ft_getenv_var("OLDPWD", env);
+		destpath = ft_strdup(ft_getenv_var("OLDPWD", env));
 	}
 	else
-		destpath = ft_fill_destpath(argv[options->start], env);
+		destpath = ft_strdup(ft_fill_destpath(argv[options->start], env));
 	if ((err = cd_step1(destpath, env, options)) < 1)
-		return (ft_cd_errors(err, destpath));
+		return (ft_cd_errors(err, destpath, options));
 	ft_memdel((void **)&destpath);
 	ft_memset((void *)options, 0, sizeof(t_opt));
 	ft_memdel((void **)&options);

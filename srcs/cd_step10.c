@@ -21,13 +21,14 @@ char			cd_step10(char *destpath, t_env *env, t_opt *options)
 	if ((chdir(destpath)) == -1)
 	{
 		ft_memdel((void **)&pwd);
+		ft_memdel((void **)&destpath);
 		return (CD_CHDIR_FAILURE);
 	}
 	if (options->oldp)
 		ft_putendl(destpath);
 	pwd = ft_ext_strjoin_free("OLDPWD=", pwd, 2);
-	ft_setenv(pwd, env, 0);
-	destpath = ft_ext_strjoin_free("PWD=", destpath, 0);
-	ft_setenv(destpath, env, 0);
+	ft_setenv(pwd, env);
+	destpath = ft_ext_strjoin_free("PWD=", destpath, 2);
+	ft_setenv(destpath, env);
 	return (0);
 }

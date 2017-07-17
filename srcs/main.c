@@ -30,6 +30,28 @@ char			**env_to_strtab(t_env *env)
 	return (envtab);
 }
 
+char			**ft_exec_path(char **av, t_env *env)
+{
+	char	**cmds;
+	char	**cmds1;
+	char	**cmds2;
+	int		i;
+
+	av[0] = ft_strmini(av[0]);
+	cmds = (char **)ft_memalloc(sizeof(char *) * 2);
+	cmds[0] = ft_strdup(av[0]);
+	cmds[1] = 0;
+	cmds2 = ft_strsplit(ft_getenv_var("PATH", env), ':');
+	i = -1;
+	while (cmds[++i])
+	{
+		cmds2[i] = ft_ext_strjoin_free(cmds2[i], "/", 1);
+		cmds2[i] = ft_ext_strjoin_free(cmds2[i], av[0], 1);
+	}
+	cmds = ft_jointabs(cmds1, cmds2);
+	return (cmds);
+}
+
 void			ft_doexec(char **av, t_env *env)
 {
 	pid_t	father;
@@ -37,25 +59,27 @@ void			ft_doexec(char **av, t_env *env)
 	char	**cmds;
 	int		i;
 
-	cmds = ft_strsplit(ft_getenv_var("PATH", env), ':');
 	i = -1;
-	while (cmds[++i])
-	{
-		cmds[i] = ft_ext_strjoin_free(cmds[i], "/", 1);
-		cmds[i] = ft_ext_strjoin_free(cmds[i], av[0], 1);
-	}
-	av[0] = ft_strmini(av[0]);
 	envi = env_to_strtab(env);
+	cmds = ft_exec_path(av, env);
 	father = fork();
 	if (father > 0)
+	{
 		wait(0);
+		ft_memdel((void **)&envi);
+	}
 	if (father == 0)
 	{
-		i = 0;
-		while (execve(cmds[i], av, envi) == -1)
+		i = -1;
+		while (execve(cmds[++i], av, envi) == -1)
 		{
-			if (!cmds[++i])
+			ft_putendl(cmds[i]);
+			if (!cmds[i])
+			{
 				error_wgcmd(av[0]);
+				ft_freetab(cmds);
+				ft_memdel((void **)&envi);
+			}
 		}
 	}
 	ft_freetab(cmds);
@@ -80,11 +104,12 @@ void			ft_dobin(char **av, t_env *env)
 	else if (!(ft_strcmp(av[0], "pwd")))
 		ft_putendl(ft_getenv_var("PWD", env));
 	else if (!(ft_strcmp(av[0], "setenv")))
-		ft_setenv(av[1], env, 1);
+		ft_setenv(av[1], env);
 	else if (!(ft_strcmp(av[0], "unsetenv")))
 		ft_vars_to_unset(av, env);
 	else
 		ft_doexec(av, env);
+	
 }
 
 int				main(int argc, char **argv, char **env)
@@ -112,16 +137,13 @@ int				main(int argc, char **argv, char **env)
 			line = linebis;
 			linesplit = ft_strsplit(line, ' ');
 			if (linesplit && linesplit[0])
-				ft_dobin(linesplit, &*envi);
+				ft_dobin(linesplit, envi);
 			ft_freetab(linesplit);
 			ft_memdel((void **)&line);
 			line = NULL;
 		}
 		else
-		{
-		//	ft_putstr("\b\r\n");
 			exit(0);
-		}
 	}
 	ft_memdel((void **)&envi);
 	return (0);
