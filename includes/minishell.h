@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 05:30:33 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/18 02:30:06 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/18 02:34:27 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void				ft_handler_child(int sig);
 void				ft_doexec(char **av, t_env *env);
 void				exec_direct_bin(char **av, t_env *env);
 void				ft_exec_path(char **av, t_env *env);
+void				ft_dobin(char **av, t_env *env);
 
 size_t				ft_envlen(t_env *env);
 size_t				value_poz(char	*varline);
