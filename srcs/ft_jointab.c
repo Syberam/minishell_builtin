@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_jointab.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbonnefo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/17 20:32:13 by sbonnefo          #+#    #+#             */
+/*   Updated: 2017/07/17 21:19:00 by sbonnefo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static int	tablen(char **tab)
@@ -16,6 +28,10 @@ char		**ft_jointabs(char **tab1, char **tab2)
 	int		i;
 	int		j;
 
+	if (!tab1)
+		return (tab2);
+	if (!tab2)
+		return (tab1);
 	newtab = (char **)ft_memalloc(sizeof(char *) *
 					(tablen(tab1) + tablen(tab2) + 1));
 	i = -1;

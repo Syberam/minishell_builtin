@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 01:40:51 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/13 10:50:37 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/17 21:16:06 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_env		*ft_fill_empty_env(void)
 
 	i = 0;
 	start = (t_env *)ft_memalloc(sizeof(t_env));
-	start->var = ft_strjoin("PWD=", getcwd(start->var, 255));
+	start->var = ft_ext_strjoin_free("PWD=", getcwd(start->var, 255), 2);
 	envbis = (t_env *)ft_memalloc(sizeof(t_env));
 	start->next = envbis;
 	envbis->var = ft_strdup("SHLVL=1");

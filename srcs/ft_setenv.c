@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 23:29:14 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/13 10:49:04 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/17 21:39:48 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ t_env			*ft_setenv(char *new, t_env *env)
 	if (!new)
 		return (env);
 	if (!ft_strchr(new, '='))
-	{
-		ft_memdel((void **)&new);
 		return (env);
-	}
 	current = env;
 	while (current)
 	{

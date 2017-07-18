@@ -6,17 +6,17 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 05:28:42 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/12 07:38:40 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/17 20:33:03 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_putprompt(t_env *env)
+void				ft_putprompt(t_env *env)
 {
-	static t_env *env_cpy = NULL;
-	char	*user;
-	char	*pwd;
+	static t_env	*env_cpy = NULL;
+	char			*user;
+	char			*pwd;
 
 	if (!env_cpy)
 		env_cpy = env;

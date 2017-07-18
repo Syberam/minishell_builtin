@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 05:30:33 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/13 04:55:51 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/18 02:30:06 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef	struct		s_env
 	struct s_env	*prev;
 }					t_env;
 
+typedef	struct stat		t_stat;
+
 void				ft_putprompt(t_env *env);
 void				ft_env(t_env *env);
 void				cd_start(char **av, t_env *env);
@@ -41,6 +43,9 @@ void				ft_vars_to_unset(char **names, t_env *env);
 void				ft_freetab(char **tab);
 void				ft_handler_father(int sig);
 void				ft_handler_child(int sig);
+void				ft_doexec(char **av, t_env *env);
+void				exec_direct_bin(char **av, t_env *env);
+void				ft_exec_path(char **av, t_env *env);
 
 size_t				ft_envlen(t_env *env);
 size_t				value_poz(char	*varline);
@@ -52,6 +57,7 @@ char				*ft_storenv(char *var, t_env *env);
 
 char				**ft_sentsplit(char *sentence);
 char				**ft_jointabs(char **tab1, char **tab2);
+char				**env_to_strtab(t_env *env);
 
 t_env				*ft_getenv(char **env);
 t_env				*ft_setenv(char *newvar, t_env *env);

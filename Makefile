@@ -6,7 +6,7 @@
 #    By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/06 04:01:59 by sbonnefo          #+#    #+#              #
-#    Updated: 2017/07/11 23:44:09 by sbonnefo         ###   ########.fr        #
+#    Updated: 2017/07/17 23:03:58 by sbonnefo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC =	$(addprefix $(SRC_PATH)/, main.c \
 		ft_freetab.c \
 		prompt.c \
 		echo.c \
+		exec.c \
 		signals.c \
 		errors.c \
 		ft_env.c \

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 18:46:06 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/12 08:50:09 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/17 23:17:29 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ typedef	struct			s_opt
 	char				lastop;
 	size_t				start;
 }						t_opt;
-
-typedef	struct stat		t_stat;
 
 char					cd_step1(char *destpath, t_env *env, t_opt *options);
 char					cd_step2(char *destpath, t_env *env, t_opt *options);
