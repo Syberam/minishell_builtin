@@ -48,11 +48,11 @@ void			ft_dobin(char **av, t_env *env)
 		ft_setenv(ft_strdup(av[1]), env);
 	else if (!(ft_strcmp(av[0], "unsetenv")))
 		ft_vars_to_unset(av, env);
-	else if (!(ft_strchr(av[0], '/')))
+	else if (ft_strchr(av[0], '/'))
 		exec_direct_bin(av, env);
 	else
-		ft_doexec(av, env);
-	ft_setenv(ft_ext_strjoin_free("_=", av[0], 0), env);
+		ft_exec_path(av, env);
+	ft_setenv(ft_strjoin("_=", av[0]), env);
 }
 
 void			exec_direct_bin(char **av, t_env *env)
@@ -107,9 +107,7 @@ void			ft_doexec(char **av, t_env *env)
 {
 	pid_t	father;
 	char	**envi;
-	int		i;
 
-	i = -1;
 	envi = env_to_strtab(env);
 	father = fork();
 	if (father > 0)
@@ -122,7 +120,7 @@ void			ft_doexec(char **av, t_env *env)
 			error_wgcmd(av[0]);
 		}
 		else
-			;
+			ft_setenv(ft_ext_strjoin_free("_=", av[0], 0), env);
 	}
 	ft_memdel((void **)&envi);
 }
