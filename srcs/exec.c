@@ -6,7 +6,7 @@
 /*   By: sbonnefo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/17 23:16:23 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/19 03:11:47 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/19 03:52:18 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char			**env_to_strtab(t_env *env)
 	len = ft_envlen(env);
 	envtab = (char **)ft_memalloc(sizeof(char *) * (len + 1));
 	i = 0;
-	while ((size_t)i < len && env)
+	while (env)
 	{
 		envtab[i] = env->var;
 		i++;
