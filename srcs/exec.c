@@ -6,7 +6,7 @@
 /*   By: sbonnefo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/17 23:16:23 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/19 03:52:18 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/19 03:58:38 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void			ft_exec_path(char **av, t_env *env)
 
 	i = -1;
 	paths = ft_strsplit(ft_getenv_var("PATH", env), ':');
-	while (paths[++i])
+	while (paths && paths[++i])
 	{
 		paths[i] = ft_ext_strjoin_free(paths[i], "/", 1);
 		paths[i] = ft_ext_strjoin_free(paths[i], av[0], 1);
