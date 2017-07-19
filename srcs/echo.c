@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 22:30:57 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/13 10:59:58 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/19 03:07:05 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char			*ft_makeconv(char *str, int i, int j, size_t *ehks)
 {
 	char		*specials;
 	char		*sp_ascode;
+	char		*part;
 
 	specials = "abcfnrtv\\";
 	sp_ascode = "\a\b\0\f\n\r\t\v\\";
@@ -28,7 +29,10 @@ char			*ft_makeconv(char *str, int i, int j, size_t *ehks)
 				ehks[2] = 1;
 			if (j - 1 == 2)
 				return (str);
-			str = ft_ext_strjoin_free(ft_strsub(str, 0, i), str + i + 1, 1);
+			part = ft_strsub(str, 0, i);
+			part = ft_ext_strjoin_free(part, str + i + 1, 1);
+			ft_memdel((void **)&str);
+			str = part;
 			break ;
 		}
 	}
