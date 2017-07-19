@@ -6,7 +6,7 @@
 /*   By: sbonnefo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/17 23:16:23 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/19 02:27:23 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/19 03:11:47 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void			ft_doexec(char **av, t_env *env)
 	pid_t	father;
 	char	**envi;
 
+	signal(SIGINT, ft_handler_child);
 	envi = env_to_strtab(env);
 	father = fork();
 	if (father > 0)
@@ -123,4 +124,5 @@ void			ft_doexec(char **av, t_env *env)
 			ft_setenv(ft_ext_strjoin_free("_=", av[0], 0), env);
 	}
 	ft_memdel((void **)&envi);
+	signal(SIGINT, ft_handler_father);
 }
