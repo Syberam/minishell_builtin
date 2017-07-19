@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 00:33:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/18 02:34:36 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/19 04:12:29 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int				main(int argc, char **argv, char **env)
 		if (gnl(0, &line) == 1)
 		{
 			linebis = ft_strtrim(line);
-			ft_memdel((void **)&line);
-			line = linebis;
+			ft_memdel((void **)&line);			line = linebis;
 			argv = ft_strsplit(line, ' ');
 			if (argv && argv[0])
 				ft_dobin(argv, envi);
@@ -36,7 +35,10 @@ int				main(int argc, char **argv, char **env)
 			ft_memdel((void **)&line);
 		}
 		else
+		{
+			ft_putstr("\b\b\n");
 			exit(0);
+		}
 	}
 	return (0);
 }

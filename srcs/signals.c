@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 09:28:06 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/13 12:44:54 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/19 04:08:12 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,5 @@ void		ft_handler_child(int sig)
 	if (wait(0) == -1)
 		return ;
 	if (sig == SIGINT)
-	{
-		ft_putstr("\b\b  \b\b\n");
-		ft_putprompt(NULL);
-	}
+		ft_putstr("\b\b");
 }
