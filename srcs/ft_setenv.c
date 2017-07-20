@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 23:29:14 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/17 21:39:48 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/20 23:20:32 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ size_t			ft_envlen(t_env *env)
 		env = env->next;
 		len++;
 	}
-	return (len - 1);
+	return (len);
 }
 
 t_env			*ft_setenv(char *new, t_env *env)
