@@ -6,7 +6,7 @@
 #    By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/10 18:28:41 by sbonnefo          #+#    #+#              #
-#    Updated: 2017/07/20 22:50:56 by sbonnefo         ###   ########.fr        #
+#    Updated: 2017/07/20 23:28:18 by sbonnefo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,7 +97,7 @@ $(NAME): $(OBJ)
 	@echo "$(NAME) \033[30;42mmade\033[0m"
 
 $(OBJ):
-	@gcc -g $(FLAGS) -c $(SRC) libft.h
+	@gcc $(FLAGS) -c $(SRC) libft.h
 
 clean:
 	@rm -Rf $(OBJ)

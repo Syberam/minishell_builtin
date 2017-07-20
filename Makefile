@@ -6,7 +6,7 @@
 #    By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/06 04:01:59 by sbonnefo          #+#    #+#              #
-#    Updated: 2017/07/20 22:50:27 by sbonnefo         ###   ########.fr        #
+#    Updated: 2017/07/20 23:28:05 by sbonnefo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ INCLUDES = ./includes ./libft
 
 LIB = $(LIB_PATH)/libft.a
 
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -61,7 +61,7 @@ fclean: clean
 	@echo "$(NAME) \t\033[30;42m Delete\033[0m\033[0m (make $@ done for $(NAME))"
 
 debug:
-	@gcc -g $(FLAGS) $(MLX_INC) -o $(NAME) $(LIB) $(LIB_MLX) $(OBJ)
+	@gcc $(FLAGS) $(MLX_INC) -o $(NAME) $(LIB) $(LIB_MLX) $(OBJ)
 
 $(LIB):
 	@make -C $(LIB_PATH)

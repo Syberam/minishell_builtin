@@ -6,18 +6,18 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 18:34:09 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/07/19 02:24:33 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/07/20 23:28:30 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_segcount(char const *s, char c)
+int			ft_segcount(char const *s, char c)
 {
-	int reading;
-	int segcount;
+	int		reading;
+	int		segcount;
 
-	if (!s					)
+	if (!s)
 		return (0);
 	reading = 0;
 	segcount = 0;
@@ -35,9 +35,9 @@ int ft_segcount(char const *s, char c)
 	return (segcount);
 }
 
-size_t ft_seglen(char const *str, char c)
+size_t		ft_seglen(char const *str, char c)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (str[len] && str[len] != c)
@@ -45,13 +45,13 @@ size_t ft_seglen(char const *str, char c)
 	return (len);
 }
 
-char **ft_strsplit(char const *s, char c)
+char		**ft_strsplit(char const *s, char c)
 {
-	char **ret;
-	int nbw;
-	int reading;
-	char *str;
-	char *word;
+	char	**ret;
+	int		nbw;
+	int		reading;
+	char	*str;
+	char	*word;
 
 	nbw = ft_segcount(s, c);
 	if (!s || !(ret = (char **)ft_memalloc(sizeof(char *) * (nbw + 1))))
