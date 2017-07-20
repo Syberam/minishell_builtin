@@ -84,6 +84,7 @@ char				*ft_strtrim(char const *s);
 char				*ft_itoa(int n);
 
 char				**ft_strsplit(char const *s, char c);
+char				**ft_split_whitespaces(char *str);
 
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);

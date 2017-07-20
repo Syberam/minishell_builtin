@@ -82,6 +82,7 @@ SRC = ft_itoa.c \
 		ft_strccpy.c \
 		get_next_line.c\
 		ft_strminimize.c\
+		ft_splitwhitespaces.c\
 		ft_print_memory.c
 
 OBJ = $(SRC:%.c=%.o) 
